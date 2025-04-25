@@ -49,9 +49,8 @@ image_path = "./examples/img_01.png"
 image_pil = Image.open(image_path)
 image = transform(image_pil).unsqueeze(0).to(device)
 
-# Inference
-results, logits = inference_ram(image, model, return_logits=True)
-print("Detected objects:", results)
+result = inference(image, model) 
+print("Results with default threshold (0.65):", res[0])
 ```
 
 ## Citation

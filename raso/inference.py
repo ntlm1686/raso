@@ -4,7 +4,7 @@
 '''
 import torch
 
-def inference_ram(image, model, return_logits=False):
+def inference(image, model, return_logits=False):
 
     with torch.no_grad():
         tags, logits = model.generate_tag(image, return_logits=return_logits)
@@ -12,7 +12,7 @@ def inference_ram(image, model, return_logits=False):
     return tags[0], logits
 
 
-def inference_ram_openset(image, model):
+def inference_openset(image, model):
 
     with torch.no_grad():
         tags = model.generate_tag_openset(image)

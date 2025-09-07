@@ -33,7 +33,7 @@ Download the model weights and place them in the `MODEL` directory:
 import torch
 from PIL import Image
 from raso.models import raso
-from raso import inference_ram, get_transform
+from raso import inference, get_transform
 
 # Load model
 model = raso(pretrained='./MODEL/raso_zeroshot.pth',
@@ -49,8 +49,8 @@ image_path = "./examples/img_01.png"
 image_pil = Image.open(image_path)
 image = transform(image_pil).unsqueeze(0).to(device)
 
-result = inference(image, model) 
-print("Results with default threshold (0.65):", res[0])
+tags, logits = inference(image, model) 
+print("Results with default threshold (0.65):", tags)
 ```
 
 ## Citation

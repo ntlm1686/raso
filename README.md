@@ -2,6 +2,8 @@
 
 RASO (Recognize Any Surgical Object) is a vision-language model for recognizing and detecting surgical instruments and objects in surgical images and videos.
 
+This work was selected as an [ICLR 2025 Spotlight presentation](https://iclr.cc/virtual/2025/poster/28666).
+
 ## Installation
 
 ```bash

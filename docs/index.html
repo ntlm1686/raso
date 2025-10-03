@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RASO (Recognize Any Surgical Object) is an open vision-language model for comprehensive recognition of surgical instruments and objects.">
+  <meta name="keywords" content="RASO, surgical AI, vision-language model, operating room intelligence">
+  <title>RASO: Recognize Any Surgical Object</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#highlights">Highlights</a>
+      <a class="navbar-item" href="#quickstart">Quickstart</a>
+      <a class="navbar-item" href="#models">Models</a>
+      <a class="navbar-item" href="#resources">Resources</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero publication-header" id="overview">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="hero-title-block">
+        <h1 class="title is-1 publication-title">RASO: Recognize Any Surgical Object</h1>
+        <h2 class="subtitle is-4">Vision-language foundation model for surgical instrument understanding</h2>
+      </div>
+      <div class="columns is-vcentered is-variable is-8">
+        <div class="column is-12-mobile hero-text-column">
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Jiajie Li<sup>1</sup>,</span>
+            <span class="author-block">Brian R. Quaranto<sup>2</sup>,</span>
+            <span class="author-block">Chenhui Xu<sup>1</sup>,</span>
+            <span class="author-block">Ishan Mishra<sup>1,3</sup>,</span>
+            <span class="author-block">Ruiyang Qin<sup>1,4</sup>,</span>
+            <span class="author-block">Dancheng Liu<sup>1</sup>,</span>
+            <span class="author-block">Peter C. W. Kim<sup>2*</sup>,</span>
+            <span class="author-block">Jinjun Xiong<sup>1*</sup></span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>1</sup>Department of Computer Science and Engineering, University at Buffalo</span>
+            <span class="author-block"><sup>2</sup>Department of Surgery, University at Buffalo</span>
+            <span class="author-block"><sup>3</sup>Department of Computer Science and Engineering, IIT, Jodhpur</span>
+            <span class="author-block"><sup>4</sup>Department of Computer Science and Engineering, University of Notre Dame</span>
+          </div>
+
+          <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup>Corresponding authors</span>
+          </div>
+
+          <p class="mt-4">RASO brings generalist recognition capabilities into the operating room. It fuses large-scale weakly supervised data with language grounding to detect and tag surgical instruments and supporting objects without exhaustive per-procedure annotations.</p>
+
+          <div class="buttons mt-5">
+            <a class="button is-dark is-rounded" href="https://arxiv.org/abs/2501.15326" target="_blank" rel="noreferrer">
+              <span class="icon"><i class="ai ai-arxiv"></i></span>
+              <span>arXiv</span>
+            </a>
+            <a class="button is-dark is-rounded" href="https://huggingface.co/Mumon/raso/tree/main" target="_blank" rel="noreferrer">
+              <span class="icon"><i class="fas fa-download"></i></span>
+              <span>Model Zoo</span>
+            </a>
+            <a class="button is-dark is-rounded" href="https://github.com/ntlm1686/raso" target="_blank" rel="noreferrer">
+              <span class="icon"><i class="fab fa-github"></i></span>
+              <span>GitHub</span>
+            </a>
+            <a class="button is-dark is-rounded" href="https://github.com/ntlm1686/raso/blob/main/inference_example.ipynb" target="_blank" rel="noreferrer">
+              <span class="icon"><i class="fas fa-play-circle"></i></span>
+              <span>Demo Notebook</span>
+            </a>
+          </div>
+        </div>
+        <div class="column is-12-mobile hero-visual-column">
+          <figure class="image hero-figure-wrapper">
+            <img class="hero-figure" src="./static/images/img1.png" alt="RASO overview illustration">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="highlights">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Why RASO</h2>
+    <div class="columns is-centered mt-5">
+      <div class="column">
+        <div class="box has-text-centered">
+          <span class="icon is-large mb-3"><i class="fas fa-search-plus fa-2x"></i></span>
+          <h3 class="title is-4">Zero-shot Coverage</h3>
+          <p>Recognize dozens of instrument and anatomy concepts out of the box by aligning vision features with rich language prompts.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box has-text-centered">
+          <span class="icon is-large mb-3"><i class="fas fa-database fa-2x"></i></span>
+          <h3 class="title is-4">Weakly Supervised Scale</h3>
+          <p>Leverages large amounts of weakly labeled surgical video to learn transferable representations without dense annotations.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="box has-text-centered">
+          <span class="icon is-large mb-3"><i class="fas fa-tools fa-2x"></i></span>
+          <h3 class="title is-4">Plug-and-Play Pipeline</h3>
+          <p>Drop-in PyTorch interface with ready-made transforms, threshold tuning, and fine-tuned weights for downstream deployment.</p>
+        </div>
+      </div>
+    </div>
+    <div class="has-text-centered mt-5">
+      <figure class="image highlight-figure">
+        <img src="./static/images/img3.png" alt="RASO recognition results illustration">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="columns is-centered teaser-gallery">
+        <!--
+        <div class="column is-narrow">
+          <img class="teaser-figure" src="./static/images/img_02.png" alt="Annotated laparoscopic frame">
+        </div>
+        <div class="column is-narrow">
+          <img class="teaser-figure" src="./static/images/img_03.png" alt="Model predictions visualization">
+        </div>
+        -->
+      </div>
+      <h2 class="subtitle has-text-centered mt-5">
+        Built to understand complex surgical scenes—from instrument tips to supporting hardware—using a single, language-aware model.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>RASO is a foundation model for computer-assisted surgery. The model combines a flexible transformer backbone with multimodal contrastive training to align visual features of laparoscopic scenes with descriptive language prompts. As a result, RASO performs robust recognition of both common and rare surgical objects, even when the exact class was never shown during supervision.</p>
+          <p>We release two ready-to-use checkpoints: a zero-shot model and a Cholect50 fine-tuned variant for high-precision instrument tracking. The package exposes simple APIs for loading checkpoints, feeding video frames, and extracting ranked tags with calibrated scores.</p>
+        </div>
+        <figure class="image overview-figure">
+          <img src="./static/images/img2.png" alt="RASO architecture overview diagram">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="quickstart">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Quickstart</h2>
+        <p>Install the package, download pretrained weights from Hugging Face, and run the inference helper to obtain ranked tags for each frame.</p>
+        <div class="content has-text-left">
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/ntlm1686/raso.git
+cd recognize-any-surgical-object
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install the package
+pip install -e .
+</code></pre>
+        </div>
+
+        <h3 class="title is-4 mt-5">Closed-set Inference</h3>
+        <p>Use <code>inference</code> for standard closed-set predictions from the pretrained checkpoints.</p>
+        <div class="content has-text-left">
+<pre><code class="language-python">import torch
+from PIL import Image
+from raso.models import raso
+from raso import inference, get_transform
+
+model = raso(pretrained="./MODEL/raso_zeroshot.pth", image_size=384, vit="swin_l")
+model.eval()
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+model = model.to(device)
+transform = get_transform(image_size=384)
+
+image = transform(Image.open("./examples/img_01.png")).unsqueeze(0).to(device)
+tags, logits = inference(image, model, threshold=0.65)
+print(tags)
+</code></pre>
+        </div>
+
+        <h3 class="title is-4 mt-5">Open-set Inference</h3>
+        <p>Pair RASO with a CLIP text encoder to score custom vocabulary while preserving the closed-set predictions.</p>
+        <div class="content has-text-left">
+<pre><code class="language-python">from transformers import CLIPModel, CLIPProcessor
+
+clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device)
+clip_proc = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+
+tags_closed, _ = inference(image, model)
+print("Closed-set tags:", tags_closed)
+
+extra_tags = ["hemostat", "laparoscopic grasper", "trocar 5mm", "new tag 1", "new tag 2"]
+
+tags_open, open_logits, full_tags = inference_openset(
+    image=image,
+    raso_model=model,
+    clip_model=clip_model,
+    clip_tokenizer=clip_proc.tokenizer,
+    extra_tags=extra_tags,
+    threshold=0.68,  # tune for precision vs. recall
+    return_tags=True,
+)
+
+print("Open-set tags:", tags_open)
+print("Open-set logits shape:", open_logits.shape)
+</code></pre>
+        </div>
+        <p class="mt-2">Lower the threshold when you want to surface more novel tags, or drop <code>return_tags=True</code> if you only need the logits.</p>
+        <p class="mt-3">See the <a href="https://github.com/ntlm1686/raso/blob/main/README.md" target="_blank" rel="noreferrer">README</a> for installation details and troubleshooting tips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="models">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Model Zoo</h2>
+    <div class="columns is-multiline mt-5">
+      <div class="column is-half">
+        <div class="box">
+          <h3 class="title is-4">Zero-shot Recognition</h3>
+          <p>Generalist checkpoint balancing recall and precision across a wide vocabulary of surgical instruments and anatomical structures.</p>
+          <p class="mt-3"><span class="tag is-dark">File</span> <a href="https://huggingface.co/Mumon/raso/blob/main/raso_zeroshot.pth" target="_blank" rel="noreferrer">raso_zeroshot.pth</a></p>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="box">
+          <h3 class="title is-4">Cholect50 Fine-tuned</h3>
+          <p>Task-optimized weights for the Cholect50 benchmark with improved instrument discrimination and stability under occlusion.</p>
+          <p class="mt-3"><span class="tag is-dark">File</span> <a href="https://huggingface.co/Mumon/raso/blob/main/raos_cholect50_ft.pth" target="_blank" rel="noreferrer">raos_cholect50_ft.pth</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="resources">
+  <div class="container is-max-desktop">
+    <div class="columns">
+      <div class="column">
+        <h2 class="title is-4">Resources</h2>
+        <ul>
+          <li><a href="https://huggingface.co/Mumon/raso/tree/main" target="_blank" rel="noreferrer">Browse repository on Hugging Face</a></li>
+          <li><a href="https://github.com/ntlm1686/raso" target="_blank" rel="noreferrer">Source code and issues</a></li>
+          <li><a href="https://arxiv.org/abs/2501.15326" target="_blank" rel="noreferrer">Paper on arXiv</a></li>
+          <li><a href="https://github.com/ntlm1686/raso#acknowledgments" target="_blank" rel="noreferrer">Acknowledgments and upstream projects</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h2 class="title is-4">BibTeX</h2>
+<pre class="bibtex-block"><code>@misc{li2025recognizesurgicalobjectunleashing,
+  title={Recognize Any Surgical Object: Unleashing the Power of Weakly-Supervised Data},
+  author={Jiajie Li and Brian R Quaranto and Chenhui Xu and Ishan Mishra and Ruiyang Qin and Dancheng Liu and Peter C W Kim and Jinjun Xiong},
+  year={2025},
+  eprint={2501.15326},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}
+</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <p><strong>RASO</strong> is released under the Creative Commons Attribution 4.0 International License.</p>
+        <p>Template adapted from the <a href="https://nerfies.github.io" target="_blank" rel="noreferrer">Nerfies project page</a>.</p>
+      </div>
+      <div class="column has-text-right">
+        <a class="icon-link" href="https://github.com/ntlm1686/raso" target="_blank" rel="noreferrer">
+          <span class="icon"><i class="fab fa-github"></i></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

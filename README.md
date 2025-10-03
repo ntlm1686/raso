@@ -27,7 +27,9 @@ Download the model weights and place them in the `MODEL` directory:
 
 ## Usage
 
-### Basic Inference
+### Closed-Set Inference
+
+Use the standard `inference` helper to obtain closed-set predictions from the pretrained model.
 
 ```python
 import torch
@@ -52,6 +54,41 @@ image = transform(image_pil).unsqueeze(0).to(device)
 tags, logits = inference(image, model) 
 print("Results with default threshold (0.65):", tags)
 ```
+
+### Open-Set Inference
+
+You can extend RASO to recognize custom vocabulary at inference time by pairing it with a CLIP text encoder and calling `inference_openset`. This keeps the closed-set predictions while adding scores for any extra tags you provide.
+
+```python
+from transformers import CLIPModel, CLIPProcessor
+
+# Load the CLIP text encoder once (reuse across images)
+clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device)
+clip_proc = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+
+# Closed-set predictions from RASO
+tags_closed, _ = inference(image, model)
+print("Closed-set tags:", tags_closed)
+
+# Add new vocabulary for open-set inference
+extra_tags = ["hemostat", "laparoscopic grasper", "trocar 5mm", "new tag 1", "new tag 2"]
+
+tags_open, open_logits, full_tags = inference_openset(
+    image=image,
+    raso_model=model,
+    clip_model=clip_model,
+    clip_tokenizer=clip_proc.tokenizer,
+    extra_tags=extra_tags,
+    threshold=0.68,  # adjust per your precision/recall needs
+    return_tags=True,  # return the merged closed- and open-set tags
+)
+
+print("Open-set tags:", tags_open)
+print("Number of open-set logits:", open_logits.shape)
+```
+
+`threshold` controls how confident the model must be to surface a new tag (default `0.68`). If you only need the open-set logits, drop `return_tags=True`.
+
 
 ## Citation
 
